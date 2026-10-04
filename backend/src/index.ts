@@ -18,4 +18,8 @@ mongoose.connect(MONGO_URL)
     process.exit(1);
   });
 
+mongoose.connection.once("open", () => {
+  console.log("Connected to database:", mongoose.connection.name);
+});
+
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
