@@ -4,7 +4,7 @@ import { ContentModel } from "../models/content.model";
 import { embedText } from "./embedding.service";
 import { answerFromContext } from "./chat.service";
 
-const SIMILARITY_THRESHOLD = 0.5;
+const SIMILARITY_THRESHOLD = 0.8;
 const CANDIDATE_POOL = 50;
 const TOP_K = 5;
 
