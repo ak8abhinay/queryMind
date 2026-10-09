@@ -58,3 +58,14 @@ export const logout = (req: Request, res: Response) => {
   res.clearCookie("token");
   res.json({ message: "Logged out" });
 };
+
+export const me = async (req: Request, res: Response) => {
+  // @ts-ignore
+  const userId = req.userId;
+  const user = await UserModel.findById(userId).select("username");
+  if (!user) {
+    res.status(404).json({ message: "User not found" });
+    return;
+  }
+  res.json({ username: user.username });
+};
