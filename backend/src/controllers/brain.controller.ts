@@ -20,13 +20,12 @@ export const shareBrain = async (req: Request, res: Response) => {
     }
     const hash = random(10);
     await LinkModel.create({ userId, hash });
-    res.json({ msg: "/share/" + hash });
+    res.json({ hash });
   } else {
     await LinkModel.deleteOne({ userId });
-    res.json({ msg: "Removed link" });
+    res.json({ message: "Removed link" });
   }
 };
-
 export const getSharedBrain = async (req: Request, res: Response) => {
   const hash = req.params.shareLink;
   const link = await LinkModel.findOne({ hash });
