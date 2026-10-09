@@ -12,11 +12,15 @@ interface SyncResult {
 export async function syncContent(content: any): Promise<number> {
   await ChunkModel.deleteMany({ contentId: content._id });
 
-  if (!content.rawText || !content.rawText.trim()) {
-    return 0; // nothing to embed, leave it with zero chunks
+  const combinedText = [content.title, content.description, content.rawText]
+    .filter(Boolean)
+    .join("\n\n");
+
+  if (!combinedText.trim()) {
+    return 0;
   }
 
-  const pieces = chunkText(content.rawText);
+  const pieces = chunkText(combinedText);
   const embeddings = await embedTexts(pieces, "RETRIEVAL_DOCUMENT");
 
   const docs = pieces.map((text, i) => ({
