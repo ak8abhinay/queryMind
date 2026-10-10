@@ -1,2 +1,10 @@
 node_modules
 dist
+.env
+.env.*
+!.env.example
+backend/cookies.txt
+*.tsbuildinfo
+mongo-backup/
+mongodb-database-tools-*/
+mongodb-database-tools-*.tgz
